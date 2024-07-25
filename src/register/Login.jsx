@@ -4,6 +4,7 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_API_URL;
 const Login = () => {
   const navigate = useNavigate();
   const { setLoggedIn, setName, setEmail, setPhone } = useContext(UserContext);
@@ -24,7 +25,7 @@ const Login = () => {
     };
     setIsPending(true);
     try {
-      const response = await axios.post('http://localhost:5000/login', user);
+      const response = await axios.post(`${apiUrl}/login`, user);
       setIsPending(false);
       setLoggedIn(true);
       setName(response.data.name);

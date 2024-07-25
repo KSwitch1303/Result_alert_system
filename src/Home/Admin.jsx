@@ -2,6 +2,7 @@ import '../styles/Admin.css'
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
 const Admin = () => {
   const [users, setUsers] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -11,13 +12,13 @@ const Admin = () => {
   },[]);
   const getUsers = async () => {
     setIsPending(true);
-    const response = await axios.post('http://localhost:5000/getusers');
+    const response = await axios.post(`${apiUrl}/getusers`);
     setUsers(response.data.user);    
     setIsPending(false);
   }
   const sendEmail = async (email, name) => {
     setIsPending(true);
-    const response = await axios.post('http://localhost:5000/sendMail', {email, name});
+    const response = await axios.post(`${apiUrl}/sendMail`, {email, name});
     alert(response.data.data);
     setIsPending(false);
   }

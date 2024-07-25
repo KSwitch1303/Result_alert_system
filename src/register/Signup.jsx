@@ -2,6 +2,8 @@ import '../styles/Signup.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
 import axios from 'axios';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 const Signup = () => {
   const navigate = useNavigate();
   const [fname, setFname] = useState("");
@@ -33,7 +35,7 @@ const Signup = () => {
     };
     setIsPending(true);
     try {
-      const response = await axios.post('http://localhost:5000/signup', user);
+      const response = await axios.post(`${apiUrl}/signup`, user);
       setIsPending(false);
       if (response.status === 200) {
         navigate('/login');
